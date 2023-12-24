@@ -7,6 +7,9 @@ import com.macias34.codingblogapi.modules.post.domain.entity.PostEntity;
 import com.macias34.codingblogapi.modules.post.domain.entity.PostModel;
 import com.macias34.codingblogapi.modules.post.domain.port.PostMapper;
 import com.macias34.codingblogapi.modules.post.domain.port.PostRepository;
+import com.macias34.codingblogapi.modules.user.domain.entity.UserModel;
+import com.macias34.codingblogapi.modules.user.domain.port.UserMapper;
+import com.macias34.codingblogapi.modules.user.usecase.FindUser;
 import com.macias34.codingblogapi.shared.validation.DtoValidator;
 
 import lombok.RequiredArgsConstructor;
@@ -16,8 +19,10 @@ import lombok.RequiredArgsConstructor;
 public class UpdatePost {
 
     private final PostRepository postRepository;
-    private final FindPost findPost;
     private final PostMapper postMapper;
+    private final FindPost findPost;
+    private final FindUser findUser;
+    private final UserMapper userMapper;
 
     public void execute(int id, UpdatePostDto updatePostDto) {
 
@@ -32,6 +37,11 @@ public class UpdatePost {
 
         if (updatePostDto.getContent() != null) {
             post.setContent(updatePostDto.getContent());
+        }
+
+        if (updatePostDto.getAuthorId() != null) {
+            UserModel author = userMapper.mapEntityToModel(findUser.execute(updatePostDto.getAuthorId()));
+            post.setAuthor(author);
         }
 
         postRepository.save(post);

@@ -2,6 +2,8 @@ package com.macias34.codingblogapi.modules.post.domain.entity;
 
 import java.time.LocalDateTime;
 
+import com.macias34.codingblogapi.modules.user.domain.entity.UserEntity;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -18,4 +20,6 @@ public class PostEntity {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    private UserEntity author;
 }

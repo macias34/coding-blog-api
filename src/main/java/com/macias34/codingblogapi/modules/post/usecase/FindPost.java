@@ -1,7 +1,5 @@
 package com.macias34.codingblogapi.modules.post.usecase;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 
 import com.macias34.codingblogapi.modules.post.domain.entity.PostEntity;
@@ -20,11 +18,10 @@ public class FindPost {
     private final PostMapper postMapper;
 
     public PostEntity execute(int id) {
-        Optional<PostModel> postModelOptional = postRepository.findById(id);
-        if (postModelOptional.isPresent()) {
-            return postMapper.mapModelToEntity(postModelOptional.get());
-        } else {
-            throw new PostNotFoundException("Post with id " + id + " not found");
-        }
+        PostModel postModel = postRepository.findById(id)
+                .orElseThrow(() -> new PostNotFoundException("Post with id " + id + " not found"));
+
+        return postMapper.mapModelToEntity(postModel);
+
     }
 }
