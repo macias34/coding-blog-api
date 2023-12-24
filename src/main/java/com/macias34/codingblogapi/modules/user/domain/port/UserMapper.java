@@ -10,4 +10,5 @@ public interface UserMapper {
     UserEntity mapModelToEntity(UserModel userModel);
 
     UserModel mapEntityToModel(UserEntity userEntity);
+
 }

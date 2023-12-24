@@ -6,6 +6,7 @@ import com.macias34.codingblogapi.modules.post.domain.entity.PostModel;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -44,6 +45,6 @@ public class UserModel {
     @Column(name = "avatar_src")
     private String avatarSrc;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
     private List<PostModel> posts;
 }

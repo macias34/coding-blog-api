@@ -24,6 +24,7 @@ public class CreatePost {
         DtoValidator.validate(createPostDto);
 
         UserModel author = userMapper.mapEntityToModel(findUser.execute(createPostDto.getAuthorId()));
+        System.out.println(author);
 
         PostModel post = PostModel.builder()
                 .title(createPostDto.getTitle())

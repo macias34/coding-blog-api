@@ -19,6 +19,10 @@ public class CreatePostDto {
     private String title;
 
     @NotNull
+    @Size(min = 3, max = 100)
+    private String excerpt;
+
+    @NotNull
     @Size(min = 3)
     private String content;
 

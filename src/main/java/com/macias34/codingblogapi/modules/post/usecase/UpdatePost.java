@@ -31,6 +31,12 @@ public class UpdatePost {
         PostEntity postEntity = findPost.execute(id);
         PostModel post = postMapper.mapEntityToModel(postEntity);
 
+        updatePost(post, updatePostDto);
+
+        postRepository.save(post);
+    }
+
+    private void updatePost(PostModel post, UpdatePostDto updatePostDto) {
         if (updatePostDto.getTitle() != null) {
             post.setTitle(updatePostDto.getTitle());
         }
@@ -44,6 +50,8 @@ public class UpdatePost {
             post.setAuthor(author);
         }
 
-        postRepository.save(post);
+        if (updatePostDto.getExcerpt() != null) {
+            post.setExcerpt(updatePostDto.getExcerpt());
+        }
     }
 }

@@ -15,6 +15,8 @@ public class PostEntity {
 
     private String title;
 
+    private String excerpt;
+
     private String content;
 
     private LocalDateTime createdAt;

@@ -36,6 +36,9 @@ public class PostModel {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "excerpt")
+    private String excerpt;
+
     @Column(name = "content")
     private String content;
 

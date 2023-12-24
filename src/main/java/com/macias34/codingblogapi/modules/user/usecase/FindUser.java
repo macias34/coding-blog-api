@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import com.macias34.codingblogapi.modules.user.domain.entity.UserEntity;
 import com.macias34.codingblogapi.modules.user.domain.entity.UserModel;
 import com.macias34.codingblogapi.modules.user.domain.exception.UserNotFoundException;
-import com.macias34.codingblogapi.modules.user.domain.port.UserMapper;
 import com.macias34.codingblogapi.modules.user.domain.port.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -15,12 +14,19 @@ import lombok.RequiredArgsConstructor;
 public class FindUser {
 
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
 
     public UserEntity execute(int id) {
         UserModel user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found"));
 
-        return userMapper.mapModelToEntity(user);
+        UserEntity userEntity = UserEntity.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .avatarSrc(user.getAvatarSrc())
+                .build();
+
+        return userEntity;
     }
 }
