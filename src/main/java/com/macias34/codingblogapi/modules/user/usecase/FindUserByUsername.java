@@ -12,14 +12,14 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class FindUser {
+public class FindUserByUsername {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    public UserEntity execute(int id) {
-        UserModel user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found"));
+    public UserEntity execute(String username) {
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("User with username " + username + " not found"));
 
         UserEntity userEntity = userMapper.mapModelToEntity(user);
 

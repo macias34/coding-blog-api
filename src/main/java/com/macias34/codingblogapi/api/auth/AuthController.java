@@ -1,7 +1,7 @@
 package com.macias34.codingblogapi.api.auth;
 
 import com.macias34.codingblogapi.api.auth.dto.SignInDto;
-import com.macias34.codingblogapi.modules.auth.domain.entity.JwtEntity;
+import com.macias34.codingblogapi.modules.auth.domain.entity.SessionEntity;
 import com.macias34.codingblogapi.modules.auth.usecase.SignIn;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +26,9 @@ public class AuthController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/sign-in")
-    public ResponseEntity<JwtEntity> signIn(@RequestBody SignInDto signInDto) {
+    public ResponseEntity<SessionEntity> signIn(@RequestBody SignInDto signInDto) {
 
-        JwtEntity jwtEntity = signIn.execute(signInDto);
+        SessionEntity jwtEntity = signIn.execute(signInDto);
 
         return new ResponseEntity<>(jwtEntity, HttpStatus.OK);
     }
