@@ -37,18 +37,22 @@ public class PostController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PostEntity> findPost(@PathVariable int id) {
-        return new ResponseEntity<PostEntity>(findPost.execute(id), HttpStatus.OK);
+        PostEntity post = findPost.execute(id);
+
+        return new ResponseEntity<PostEntity>(post, HttpStatus.OK);
     }
 
     @GetMapping("")
     public ResponseEntity<List<PostEntity>> findAllPosts() {
-        return new ResponseEntity<List<PostEntity>>(findManyPosts.execute(), HttpStatus.OK);
+        List<PostEntity> posts = findManyPosts.execute();
+
+        return new ResponseEntity<List<PostEntity>>(posts, HttpStatus.OK);
     }
 
     @PostMapping("")
-    public ResponseEntity<Void> createPost(@RequestBody CreatePostDto createPostDto) {
-        createPost.execute(createPostDto);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<PostEntity> createPost(@RequestBody CreatePostDto createPostDto) {
+        PostEntity post = createPost.execute(createPostDto);
+        return new ResponseEntity<>(post, HttpStatus.CREATED);
     }
 
     @PatchMapping("/{id}")

@@ -3,7 +3,9 @@ package com.macias34.codingblogapi.modules.post.usecase;
 import org.springframework.stereotype.Service;
 
 import com.macias34.codingblogapi.api.post.dto.CreatePostDto;
+import com.macias34.codingblogapi.modules.post.domain.entity.PostEntity;
 import com.macias34.codingblogapi.modules.post.domain.entity.PostModel;
+import com.macias34.codingblogapi.modules.post.domain.port.PostMapper;
 import com.macias34.codingblogapi.modules.post.domain.port.PostRepository;
 import com.macias34.codingblogapi.modules.user.domain.entity.UserModel;
 import com.macias34.codingblogapi.modules.user.domain.port.UserMapper;
@@ -18,8 +20,9 @@ public class CreatePost {
     private final PostRepository postRepository;
     private final FindUser findUser;
     private final UserMapper userMapper;
+    private final PostMapper postMapper;
 
-    public void execute(CreatePostDto createPostDto) {
+    public PostEntity execute(CreatePostDto createPostDto) {
 
         DtoValidator.validate(createPostDto);
 
@@ -29,6 +32,6 @@ public class CreatePost {
                 .author(author)
                 .build();
 
-        postRepository.save(post);
+        return postMapper.mapModelToEntity(postRepository.save(post));
     }
 }
