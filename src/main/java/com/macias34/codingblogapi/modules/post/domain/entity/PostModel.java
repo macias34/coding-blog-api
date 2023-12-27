@@ -39,7 +39,7 @@ public class PostModel {
     @Column(name = "excerpt")
     private String excerpt;
 
-    @Column(name = "content")
+    @Column(name = "content", length = 10485760, columnDefinition = "TEXT")
     private String content;
 
     @CreationTimestamp
