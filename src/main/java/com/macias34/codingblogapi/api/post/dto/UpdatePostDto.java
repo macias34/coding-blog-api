@@ -19,6 +19,10 @@ public class UpdatePostDto {
     private String title;
 
     @Nullable
+    @Size(min = 3, max = 100)
+    private String excerpt;
+
+    @Nullable
     @Size(min = 3)
     private String content;
 

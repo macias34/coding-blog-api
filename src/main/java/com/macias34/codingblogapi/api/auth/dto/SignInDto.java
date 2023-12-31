@@ -1,4 +1,4 @@
-package com.macias34.codingblogapi.api.post.dto;
+package com.macias34.codingblogapi.api.auth.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -9,9 +9,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreatePostDto {
+public class SignInDto {
 
     @NotNull
-    private Integer authorId;
+    @Size(min = 3, max = 100)
+    private String username;
+
+    @NotNull
+    @Size(min = 3)
+    private String password;
 
 }
